@@ -1,3 +1,6 @@
 class RateMonotonic:
-    def __init__(self, queueProcesso):
-        self.queueProcesso = queueProcesso
+    def __init__(self, listProcessos):
+        self.listProcessos = listProcessos
+
+    def isFactive(self):
+        pass
