@@ -1,8 +1,8 @@
-o arquivo de entrada dos processos tem a seguinte organizaÁ„o:
+o arquivo de entrada dos processos tem a seguinte organiza√ß√£o:
 
-'Id do processo' 'tempo de execuÁ„o' 'deadline' 'pediodo de execuÁ„o'
+'Id do processo' 'tempo de execu√ß√£o' 'deadline' 'pediodo de execu√ß√£o'
 	P1 		2 		4 		5
 
 NESSA ORDEM!
 
-Cada linha n„o nula ser· um processo a ser execultado!
+Cada linha n√£o nula ser√° um processo a ser executado!
