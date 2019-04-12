@@ -7,13 +7,12 @@ class RateMonotonic:
         for elem in reversed(listObj):
             if elem is not listObj[0]:
                 last_response_time = elem.executionTime
-                while True:
+                for x in range(0, len(listObj)-1):
                     response = self.calculate_response(last_response_time, listObj, elem.executionTime)
-                    if response == int(last_response_time):
-                        if response > int(elem.deadline):
-                            return False
-                        else:
-                            return True
+                    if response == int(last_response_time) or response <= int(elem.deadline):
+                        return True
+                    if response > int(elem.deadline):
+                        return False
                     else:
                         last_response_time = response
 
