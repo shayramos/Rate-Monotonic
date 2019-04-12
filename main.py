@@ -1,4 +1,5 @@
 from processos import Process
+from RM_algorithm import RateMonotonic
 
 def main():
     processList = open("archiveProcess.txt").readlines()
@@ -31,4 +32,10 @@ def main():
 
         print(listObj_ordenado[0].prioridade)
         print(listObj_ordenado[1].prioridade)
+
+        rate_m = RateMonotonic()
+        is_fac = rate_m.isFactive(listObj_ordenado)
+        print(is_fac)
+
+
 main()
