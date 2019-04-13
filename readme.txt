@@ -1,7 +1,7 @@
 o arquivo de entrada dos processos tem a seguinte organização:
 
-'Id do processo' 'tempo de execução' 'deadline' 'periodo de execução'
-	P1 		2 		4 		5
+'Id do processo' 'tempo de execução' 'deadline' 
+	P1 		2 		4 		
 NESSA ORDEM!
 Cada linha não nula será um processo a ser executado!
 
