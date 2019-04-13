@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from processos import Process
-import math
-#from RM_algorithm import RateMonotonic
+import math  #Para cálculo do ceiling
+
 
 def calculo(lista):
     
@@ -22,6 +22,7 @@ def calculo(lista):
         if(i.prioridade == 0):  # Se for a primeira tarefa (maior prioridade), atual = C0 (C da tarefa de maior prioridade)
             atual  = i.executionTime
             if( atual > i.deadline):  # Se por acaso o C da maior prioridade for maior que seu deadline, retorna falso
+                print("\nEscalonabilidade impossivel para ",i.id)
                 return False
 
         #Se a prioridade da tarefa não for a maior de todas        
@@ -44,6 +45,7 @@ def calculo(lista):
 
                 if(atual > i.deadline):
                     #print("FLAG 1")
+                    print("\nEscalonabilidade impossivel para ",i.id)
                     return False #Caso o valor calculado ultrapasse o valor do deadline;    
     
                 if(atual == anterior):  # Caso o valor calculado seja menor que deadline e R_k == R_k+1
@@ -52,33 +54,41 @@ def calculo(lista):
                     anterior = atual     #Atualiza 'anterior' caso atual não tenha alcançado mesmo valor de 'anterior' 
 
             
+            print("Valor de Tempo para tarefa ", i.id, " : ", atual)
             
     #Se todas as tarefas não extrapolaram os seus respectivos deadlines, entao retorna true
+    print("\nEscalonabilidade factível")
     return True    
+
+
+
+
+
+
 
 def main():
     processList = open("archiveProcess.txt").readlines()
     if not processList:
         print("O arquivo está vazio!")
     else:
-        print("encontrei o arquivo")
+        print("encontrei o arquivo\n")
         #qntprocess = len(processList)
         #print(qntprocess)
-        print(processList)
+        #print(processList)
         listObj=[]
         for i in processList:
-            p = Process(None, None, None, None)
+            p = Process(None, None, None)
             p.id = i.split(' ')[0]
-            p.executionTime = int(i.split(' ')[1])
-            p.deadline = int(i.split(' ')[2])
-            p.periodo = int(i.split(' ')[3])
+            p.executionTime = float(i.split(' ')[1])
+            p.deadline = float(i.split(' ')[2])
+            #p.periodo = float(i.split(' ')[3])
             listObj.append(p)
 
         #quanto menor o periodo, maior a prioridade
         #considerar maior prioridade 1
-        listObj_ordenado = sorted(listObj, key=Process.getPeriodo)
-        for i in listObj_ordenado:
-            print(i.id ,i.deadline)
+        listObj_ordenado = sorted(listObj, key = Process.getDeadline)
+        #for i in listObj_ordenado:
+         #   print(i.id ,i.deadline)
       
 
         cont=1
@@ -86,13 +96,16 @@ def main():
             i.setPrioridade(cont)
             cont=cont+1
         
-
+        print("Exibindo lista de prioridades (maior = topo ; menor = base)")
         for i in listObj_ordenado:
             print(i.prioridade, i.id)
-        
-        if(calculo(listObj_ordenado)):
-            print("Escalonabilidade factível")
-        else:
-            print("Escalonabilidade impossivel")
+
+        print()
+
+        calculo(listObj_ordenado)
+       #if(calculo(listObj_ordenado)):
+        #    rint("\nEscalonabilidade factível")
+        #else:
+         #   print("\nEscalonabilidade impossivel")
       
 main()
